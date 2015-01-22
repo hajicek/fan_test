@@ -67,6 +67,11 @@ void loop() {
     else {
         stop_fans();
     }
+
+    //catch an integer overflow making the value negative, about 3 button presses/45 mins
+    if (fanTimerTenthSecs < 0) {
+        fanTimerTenthSecs = 15*60*10 * 3; //put 45 minutes on the clock
+    }
     
     delay(100); //run loop 10 times per second
 }
